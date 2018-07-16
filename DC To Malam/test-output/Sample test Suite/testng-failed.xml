@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Sample test Suite]">
+  <test name="Test2(failed)">
+    <classes>
+      <class name="Auto">
+        <methods>
+          <include name="Autox"/>
+        </methods>
+      </class> <!-- Auto -->
+      <class name="ExtentReportsClass2">
+        <methods>
+          <include name="startReport"/>
+          <include name="endReport"/>
+          <include name="getResult"/>
+          <include name="Adi"/>
+          <include name="failTest"/>
+          <include name="skipTest"/>
+        </methods>
+      </class> <!-- ExtentReportsClass2 -->
+    </classes>
+  </test> <!-- Test2(failed) -->
+</suite> <!-- Failed suite [Sample test Suite] -->
