@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 
 public class Login extends JFrame
 {
-	private final JLabel lblNewLabel = new JLabel("Login - Malam");
+	private final JLabel lblNewLabel = new JLabel("Malam");
 	private final JLabel lblId = new JLabel("ID :");
 	private final JLabel lblPassword = new JLabel("Password :");
 	private JTextField ID_JTextFiled;
@@ -20,7 +20,7 @@ public class Login extends JFrame
 	
 	public Login()
 	{
-		setTitle("Login");
+		setTitle("Malam - login");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
@@ -29,7 +29,7 @@ public class Login extends JFrame
 		panel_1.setBounds(0, 0, 338, 183);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
-		lblNewLabel.setBounds(78, 11, 165, 28);
+		lblNewLabel.setBounds(124, 11, 76, 28);
 		panel_1.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		lblId.setFont(new Font("Times New Roman", Font.PLAIN, 16));
@@ -44,7 +44,15 @@ public class Login extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
+				try 
+				{
 					new Auto(ID_JTextFiled.getText(), pass_JPasswordField.getPassword());
+				} 
+				catch (Exception ex) 
+				{
+					ex.printStackTrace();
+					//Auto.terminateChormeDriverProc();
+				}
 
 			}
 		});
@@ -64,10 +72,11 @@ public class Login extends JFrame
 		pass_JPasswordField.setBounds(107, 113, 86, 20);
 		panel_1.add(pass_JPasswordField);
 		
-		ID_JTextFiled.setText("200941516");
-		pass_JPasswordField.setText("@@");
+		ID_JTextFiled.setText("xxxx");
+		pass_JPasswordField.setText("xxx");
 		
 		setSize(344, 211);
+		setLocationRelativeTo(null);
 		setVisible(true);
 		
 	}
