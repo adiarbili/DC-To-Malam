@@ -44,15 +44,18 @@ public class Login extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				try 
+				new Auto(ID_JTextFiled.getText(), pass_JPasswordField.getPassword());
+				
+				/*try 
 				{
-					new Auto(ID_JTextFiled.getText(), pass_JPasswordField.getPassword());
+					
 				} 
 				catch (Exception ex) 
 				{
 					ex.printStackTrace();
 					//Auto.terminateChormeDriverProc();
 				}
+				*/
 
 			}
 		});
