@@ -1,6 +1,14 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.URI;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -26,8 +34,22 @@ public class Auto
 		
 	public Auto(String id, char[] password)
 	{
+		
 		//System.setProperty("webdriver.chrome.driver", "D:\\Work-Elbit\\Selenium\\chromedriver.exe"); //Chrome
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Adi\\Desktop\\IEDriverServer.exe"); //IE
+		try 
+		{
+			String IE_Path = extractWebDriver();
+			
+			System.setProperty("webdriver.ie.driver", "/" + IE_Path); //IE
+
+			
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+			
+		}
+
 		
 
 		//chromeDriver = new ChromeDriver();
@@ -143,6 +165,7 @@ public class Auto
 		catch (Exception e) 
 		{
 			System.out.println(componeteIdentifier + " object was not foud.");
+			chromeDriver.quit();
 			//alert()
 		}
 		
@@ -160,5 +183,34 @@ public class Auto
 			e.printStackTrace();
 		}
 	}
+	
+	public String extractWebDriver() throws IOException
+	{
+		InputStream fileStream = getClass().getResourceAsStream("/IEDriverServer.exe");
+	    // this temporary file remains after the jvm exits
+	    File tempFile = File.createTempFile("IEDriverServer", ".exe");
+	    tempFile.deleteOnExit();
+	    System.out.format("Canonical filename: %s\n", tempFile.getCanonicalFile());
+	    
+	    
+        // Create an output stream to copy data to the temp file
+        OutputStream out = new FileOutputStream(tempFile);
 
+        // Write the file to the temp file
+        byte[] buffer = new byte[1024];
+        int len = fileStream.read(buffer);
+        while (len != -1) {
+            out.write(buffer, 0, len);
+            len = fileStream.read(buffer);
+        }
+
+        // Store this file in the cache list
+       // fileCache.put(jarFilePath, tempFile.getAbsolutePath());
+
+        // Close the streams
+        fileStream.close();
+        out.close();	
+        
+        return tempFile.getCanonicalFile().toString();
+	}
 }
