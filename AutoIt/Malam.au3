@@ -5,27 +5,27 @@ Global $IE
 
 Func openMalamWeb()
 	Const $URL = "https://payroll.malam.com/Salprd5Root/faces/login.jspx?_adf.ctrl-state=nxf3jytz6_3&_afrRedirect=1420473524336962"
+	Const $TIME_TO_EXIT = 30000
+	Local $time = 0
 
 	Run("C:\Program Files\Internet Explorer\iexplore.exe")
-	WinWait("[CLASS:Google - Internet Explorer]", "", 10)
 
-	If @error Then
-		MsgBox(0,'WinWait error', @error)
-		Exit
-	EndIf
+	Do
+		Sleep(1000)
+		$IE =_IEAttach("Google")
+		$time = $time + 1000
+	Until  ((NOT @error) Or ($time > $TIME_TO_EXIT))
 
-	#Sleep(10000)
-	$IE =_IEAttach("Google")
-	_IENavigate($IE, $URL)
+	#ConsoleWrite("time = " & $time & @CRLF)
+	#ConsoleWrite("error = " & @error  & " error = " & Not @error & @CRLF)
 
-
-	If @error Then
+	If (@error Or $time >= $TIME_TO_EXIT) Then
 		MsgBox(0,'_IEAttach error', @error)
 		Exit
 	Else
+		_IENavigate($IE, $URL)
 		Login()
 	EndIf
-
 EndFunc
 
 Func login()
