@@ -8,7 +8,7 @@ Func openMalamWeb()
 	Const $TIME_TO_EXIT = 30000
 	Local $time = 0
 
-	Run("C:\Program Files\Internet Explorer\iexplore.exe")
+	Run("C:\Program Files\Internet Explorer\iexplore.exe", "" , @SW_MAXIMIZE)
 
 	Do
 		Sleep(1000)
